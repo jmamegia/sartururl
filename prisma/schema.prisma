@@ -1,0 +1,20 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+// npx prisma generate
+// npx prisma migrate dev --name reinit
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Link {
+  id        Int      @id @unique @default(autoincrement())
+  url       String   @unique
+  shortUrl  String   @unique
+  createdAt DateTime @default(now())
+}
