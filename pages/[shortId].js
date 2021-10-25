@@ -1,14 +1,13 @@
-import { PrismaClient } from "@prisma/client";
+import Link from "../db/Link";
 
 export default function ShortId() {
   return <div>Short redirect</div>;
 }
 
 export async function getServerSideProps({ params }) {
-  const prisma = new PrismaClient();
   const { shortId } = params;
 
-  const data = await prisma.link.findUnique({
+  const data = await Link.findOne({
     where: {
       shortUrl: shortId,
     },
