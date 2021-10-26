@@ -5,7 +5,8 @@ import styles from "../styles/Home.module.css";
 export default function Home() {
   const inputRef = useRef();
   const selectRef = useRef();
-  const [message, setMessage] = useState(" ");
+  const messageRef = useRef();
+  const [message, setMessage] = useState(null);
   const [urlFormat, setUrlformat] = useState(false);
 
   const handdleSubmit = (e) => {
@@ -23,9 +24,21 @@ export default function Home() {
   };
 
   function isUrl() {
-    var regexp = /(ftp|http|https):\/\/[\w\-]+(\.[\w\-]+)+[/#?]?.*$/;
+    setMessage(null);
+    const regexp = /(ftp|http|https):\/\/[\w\-]+(\.[\w\-]+)+[/#?]?.*$/;
     const match = regexp.test(selectRef.current.value + inputRef.current.value);
     setUrlformat(match);
+  }
+
+  function handleClick() {
+    const selection = window.getSelection();
+    const range = document.createRange();
+    range.selectNode(messageRef.current);
+    selection.removeAllRanges();
+    selection.addRange(range);
+    try {
+      document.execCommand("copy");
+    } catch {}
   }
 
   return (
@@ -55,8 +68,19 @@ export default function Home() {
             />
             <button disabled={!urlFormat}>Short</button>
             <div className={styles.resultUrl}>
-              <b>Short URL: </b>
-              {message}
+              {message && (
+                <div>
+                  <b>Short URL: </b>
+                  <input disabled value={message} ref={messageRef}></input>
+                  <button onClick={handleClick}>
+                    <img
+                      src="/copy-to-clipboard-64.png"
+                      alt="copy"
+                      title="Copy"
+                    />
+                  </button>
+                </div>
+              )}
             </div>
           </form>
         </div>

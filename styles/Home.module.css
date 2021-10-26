@@ -66,6 +66,17 @@
   margin-top: 3rem;
 }
 
+.grid img {
+  height: 1.2rem;
+  width: 1.2rem;
+}
+.grid img:hover {
+  cursor: pointer;
+}
+.disabled {
+  opacity: 0.1;
+}
+
 .logo {
   height: 1em;
   margin-left: 0.5rem;
