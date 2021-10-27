@@ -20,7 +20,7 @@ export default function Home() {
       body: JSON.stringify({ url }),
     })
       .then((res) => res.json())
-      .then((data) => setMessage(` ${window.location}${data.shortUrl}`));
+      .then((data) => setMessage(`${data.shortUrl}`));
   };
 
   function isUrl() {
