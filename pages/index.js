@@ -6,8 +6,8 @@ export default function Home() {
   const inputRef = useRef();
   const selectRef = useRef();
   const messageRef = useRef();
-  const [message, setMessage] = useState(null);
-  const [urlFormat, setUrlformat] = useState(false);
+  const [message, setMessage] = useState("");
+  const [urlFormat, setUrlformat] = useState(undefined);
 
   const handdleSubmit = (e) => {
     e.preventDefault();
@@ -24,7 +24,7 @@ export default function Home() {
   };
 
   function isUrl() {
-    setMessage(null);
+    setMessage("");
     const regexp = /(ftp|http|https):\/\/[\w\-]+(\.[\w\-]+)+[/#?]?.*$/;
     const match = regexp.test(selectRef.current.value + inputRef.current.value);
     setUrlformat(match);
@@ -68,19 +68,22 @@ export default function Home() {
             />
             <button disabled={!urlFormat}>Short</button>
             <div className={styles.resultUrl}>
-              {message && (
-                <div>
-                  <b>Short URL: </b>
-                  <input disabled value={message} ref={messageRef}></input>
-                  <button onClick={handleClick}>
-                    <img
-                      src="/copy-to-clipboard-64.png"
-                      alt="copy"
-                      title="Copy"
-                    />
-                  </button>
-                </div>
-              )}
+              <div className={message ? undefined : styles.hide}>
+                <b>Short URL: </b>
+                <input
+                  disabled
+                  className={styles.disableSelect}
+                  value={message}
+                  ref={messageRef}
+                ></input>
+                <button onClick={handleClick}>
+                  <img
+                    src="/copy-to-clipboard-64.png"
+                    alt="copy"
+                    title="Copy"
+                  />
+                </button>
+              </div>
             </div>
           </form>
         </div>

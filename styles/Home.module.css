@@ -73,8 +73,11 @@
 .grid img:hover {
   cursor: pointer;
 }
-.disabled {
-  opacity: 0.1;
+.hide {
+  visibility: hidden;
+}
+.disableSelect::selection {
+  background-color: transparent;
 }
 
 .logo {

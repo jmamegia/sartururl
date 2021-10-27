@@ -37,3 +37,5 @@ yarn-error.log*
 *.sqlite
 ./db.sqlite
 db.sqlite
+
+.fuse_hidden0000*
