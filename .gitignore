@@ -35,3 +35,5 @@ yarn-error.log*
 
 #sqlite
 *.sqlite
+./db.sqlite
+db.sqlite
